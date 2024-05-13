@@ -1,13 +1,13 @@
 
 # Admin Page of Hotel Booking Management System
 
-This project is part of the Course of Web & Hybrid development which is taken at Grand Hackathon. 
+Project name: Hotel Booking Management 
 
 ## Demo of Admin Page
 
 - Account to log in
-Email : admin@gmail.com
-Password : adminadmin
+- Email : admin@gmail.com
+- Password : adminadmin
 
 ## Features
 
@@ -31,13 +31,13 @@ Password : adminadmin
 Clone the project
 
 ```bash
-  git clone https://github.com/Nabia-Sheikh/hotel-management-admin.git
+  git https://github.com/Kevin310703/HotelBookingManagement-Website.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd hotel-management-system
+  cd frontend/admin
 ```
 
 Install dependencies
