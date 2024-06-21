@@ -119,8 +119,6 @@ exports.logIn = async (req, res) => {
     }
 }
 
-
-
 exports.postUser = async (req, res) => {
     res.send(req.user)
 }

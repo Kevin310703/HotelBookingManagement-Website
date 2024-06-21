@@ -1,5 +1,5 @@
 
-# Admin Page of Hotel Booking Management System
+# Admin Page of Hotel Booking Management
 
 Project name: Hotel Booking Management 
 
@@ -19,19 +19,27 @@ Project name: Hotel Booking Management
 - Handle bookings
 - Validation of admins.
 
-## Tech Stack
+## 🖥️ Tech Stack :
 
-**Client:** React, Redux, React-Bootstrap , Bootstrap , Context API
+**Frontend:** React, Redux, React-Bootstrap , Bootstrap , Context API
+
+**Backend:** Java Swing Boot, JWT
 
 **Server:** Firebase Realtime Database, Firebase Authentication
 
+**Database:** PostgreSQL
+
+**Dependencies:** React icons, React elastic carousel, Leaflet Maps, Country-state-city, React-hot-toast, React-spinners, Recharts
+
+
+Live version : Not available right now. But deployed link is published very soon.
 
 ## Run Locally
 
 Clone the project
 
 ```bash
-  git https://github.com/Kevin310703/HotelBookingManagement-Website.git
+  git clone https://github.com/Kevin310703/HotelBookingManagement-Website.git
 ```
 
 Go to the project directory

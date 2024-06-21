@@ -1,4 +1,7 @@
 # Welcome to the JC Travels Solution 🎓
+# Client Page of Hotel Booking Management
+
+Project name: Hotel Booking Management
 
 🌐 Explore, Book, Enjoy - Your Ultimate Hotel Booking Solution
 
@@ -24,15 +27,13 @@ its A hotel booking management platform for the travellers. I led end to end des
 
 **Admin Dashboard:** Empowering administrators with tools to manage hotels, bookings, and user data efficiently.
 
-
-
 ## 🖥️ Tech Stack :
 
 **Frontend:** React, Redux, TailwindCSS, Tanstack query, Axios, React-hook-form, Vite
 
-**Backend:** Node, Express, JWT
+**Backend:** Java Swing Boot, JWT
 
-**Database:** MongoDB
+**Database:** PostgreSQL
 
 **Dependencies:** React icons, React elastic carousel, Leaflet Maps, Country-state-city, React-hot-toast, React-spinners, Recharts
 
@@ -40,11 +41,12 @@ its A hotel booking management platform for the travellers. I led end to end des
 Live version : Not available right now. But deployed link is published very soon.
 
 
-## Usage
+## Run Locally
 
-**For cloning** 
-```
- git clone https://github.com/skmirajulislam/JourneyCusine.git
+Clone the project
+ 
+```bash
+ git clone https://github.com/Kevin310703/HotelBookingManagement-Website.git
 ```
 
 Inside JourneyCusine
@@ -56,22 +58,6 @@ Inside JourneyCusine
 ```
 
 
-## contributors
-
-A heartfelt thank you to all the amazing contributors who have poured their time, expertise, and passion into making the JC project a success. Your dedication and hard work have truly elevated the project to new heights..
-
-Thank you, JC contributors, for your hard work, dedication, and for being an integral part of this incredible community.
-
-Keep coding brilliantly!
-
-[Sk Mirajul islam]
-[Susshrita Jana]
-[Aishiki Mondal]
-
-## License
-
-- [MIT](https://github.com/skmirajulislam/Majorproject.github.io/blob/master/LICENSE-MIT)
-- [Mozilla Public License 2.0](https://github.com/skmirajulislam/Majorproject.github.io/blob/master/LICENSE)
 
 
 

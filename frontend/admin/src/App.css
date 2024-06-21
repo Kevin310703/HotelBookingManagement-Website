@@ -540,3 +540,25 @@ input[type="number"]:focus,
   padding: 5px 8px;
 }
 /* end of about us */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: blue;
+  border-color: blue;
+  color: white;
+}
+
+.pagination .page-link {
+  color: blue;
+  border: 1px solid blue;
+  margin: 0 2px;
+}
+
+.pagination .page-link:hover {
+  background-color: lightblue;
+}

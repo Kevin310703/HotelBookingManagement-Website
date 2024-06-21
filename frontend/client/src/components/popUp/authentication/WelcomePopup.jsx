@@ -29,31 +29,22 @@ const WelcomePopup = ({
   };
 
   const handleCheckEmail = async (data) => {
+    const { users } = useContext(UserContext);
     const email = data.email;
     setLoginEmail(email);
     setIsLoading(true);
+  
     try {
-      const response = await axios.post(
-        `${API}auth/check_email`,
-        {
-          email: email,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      const responseData = response?.data;
-      if (responseData?.success === 1) {
+      const existingUser = users.find(user => user.email === email);
+  
+      if (existingUser) {
         setDefaultPopup(false);
         setShowLoginPopup(true);
-      }
-      if (responseData?.success === 0) {
+      } else {
         setDefaultPopup(false);
         setShowCreateUserPopup(true);
       }
+  
       setTimeout(() => {
         reset();
       }, 300);
@@ -109,10 +100,10 @@ const WelcomePopup = ({
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col">
       {/* welcome option */}
       <div className="px-8 pt-4">
-        <h2 className="font-medium text-[22px] text-[#222222]">
+        <h2 className="font-medium text-[22px] text-[#222222] text-center">
           Welcome to Motel
         </h2>
         <form onSubmit={handleSubmit(handleCheckEmail)}>

@@ -1,10 +1,11 @@
-import { onValue, ref, update } from "firebase/database";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Table from "react-bootstrap/Table";
-import { db } from "../firebase";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import Pagination from "./Pagination";
+import { getBookings, updateBookingStatus } from "../Redux/Booking/bookingActions";
 
 const StatusTD = styled.td`
   font-weight: bold;
@@ -12,67 +13,61 @@ const StatusTD = styled.td`
   color: ${(props) => (props.type === "Accepted" ? "green" : "")};
   color: ${(props) => (props.type === "Rejected" ? "red" : "")};
 `;
+
 const Bookings = () => {
-  const [bookings, setBookings] = useState([]);
+  const dispatch = useDispatch();
+  const { bookings, total, page, pageSize, loading, error } = useSelector((state) => state.bookings);
 
-  React.useEffect(() => {
-    onValue(ref(db, "/bookings/"), (snapshot) => {
-      setBookings([]);
-      const data = snapshot.val();
-      if (data !== null) {
-        // eslint-disable-next-line array-callback-return
-        Object.values(data).map((booking) => {
-          setBookings((oldArray) => [...oldArray, booking]);
-        });
-      }
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useEffect(() => {
+    dispatch(getBookings(page, pageSize));
+  }, [dispatch, page, pageSize]);
 
-  
-
-  const updateBooking = (bookingNumb, status) => {
-    update(ref(db, `bookings/${bookingNumb}`), {
-      status,
-    });
+  const handlePageChange = (pageNumber) => {
+    dispatch(getBookings(pageNumber, pageSize));
   };
 
-  console.log(bookings);
+  const updateBooking = (bookingId, status) => {
+    dispatch(updateBookingStatus(bookingId, status));
+  };
+
   return (
     <>
-      {bookings ? (
-        <Table
-          striped
-          bordered
-          hover
-          size="sm"
-          style={{ marginTop: "80px", width: "90%", margin: "80px auto" }}
-        >
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Email</th>
-              <th>Name</th>
-              <th>Room type</th>
-              <th>Start Date</th>
-              <th>End Date</th>
-              <th>Capactiy</th>
-              <th>Price</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bookings.map((booking) => (
-              <tr key={booking.id}>
-                <>
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>{error}</p>
+      ) : bookings.length > 0 ? (
+        <>
+          <Table
+            striped
+            bordered
+            hover
+            size="sm"
+            style={{ marginTop: "80px", width: "90%", margin: "80px auto" }}
+          >
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Full Name</th>
+                <th>Room Name</th>
+                <th>Check-In Date</th>
+                <th>Check-Out Date</th>
+                <th>Hotel Name</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {bookings.map((booking) => (
+                <tr key={booking.id}>
                   <td>{booking.id}</td>
-                  <td>{booking.refID}</td>
-                  <td>{booking.name}</td>
-                  <td>{booking.type && booking.type.toUpperCase()}</td>
-                  <td>{booking.startDate}</td>
-                  <td>{booking.endDate}</td>
-                  <td>{booking.capacity}</td>
-                  <td>{booking.totalPrice}</td>
+                  <td>{booking.email}</td>
+                  <td>{booking.fullName}</td>
+                  <td>{booking.roomName}</td>
+                  <td>{new Date(booking.checkInDate).toLocaleDateString()}</td>
+                  <td>{new Date(booking.checkOutDate).toLocaleDateString()}</td>
+                  <td>{booking.hotelName}</td>
                   <StatusTD type={booking.status}>{booking.status}</StatusTD>
                   {booking.status === "Pending" ? (
                     <>
@@ -85,26 +80,26 @@ const Bookings = () => {
                           }}
                           onClick={() => updateBooking(booking.id, "Accepted")}
                         />
-                      </td>
-                      <td style={{ textAlign: "center" }}>
                         <FaTimesCircle
                           color="red"
                           style={{
                             cursor: "pointer",
                             fontSize: "20px",
+                            marginLeft: "10px",
                           }}
                           onClick={() => updateBooking(booking.id, "Rejected")}
                         />
                       </td>
                     </>
                   ) : (
-                    <></>
+                    <td></td>
                   )}
-                </>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+          <Pagination totalPages={Math.ceil(total / pageSize)} currentPage={page} onPageChange={handlePageChange} />
+        </>
       ) : (
         <div className="container roomerror">
           <div className="row my-5">

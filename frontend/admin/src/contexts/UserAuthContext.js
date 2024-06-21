@@ -1,56 +1,55 @@
 import { createContext, useContext, useEffect, useState } from "react";
-
-import {
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-} from "firebase/auth";
-
-import { auth, db } from "../firebase";
-
-import { child, get, ref } from "firebase/database";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const userAuthContext = createContext();
 
-
 export function UserAuthContextProvider({ children }) {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-
-  function logIn(email, password) {
-    get(child(ref(db), "/users")).then((data) => {
-      const userAuth = Object.values(data.val()).filter(
-        (item) => item.email === email && item.isAdmin === true
-      );  
-      if (userAuth[0]) {
-        return signInWithEmailAndPassword(auth, email, password).then(()=>navigate("/rooms"))
-      }
-      alert("Please Sign in with Admin Account.");
-    });
-  }
-
+  const logIn = async (email, password) => {
+    try {
+      const response = await axios.post("http://213.136.80.48:8889/api/auth/login", {
+        email,
+        password
+      });
   
-  function logOut() {
-    return signOut(auth);
-  }
+      const { token, refreshToken, email: userEmail } = response.data;
   
+      // Store token and user information in localStorage
+      localStorage.setItem("token", token);
+      localStorage.setItem("refreshToken", refreshToken);
+      localStorage.setItem("userEmail", userEmail);
+  
+      // Update user state
+      setUser({ email: userEmail });
+  
+      navigate("/rooms");
+    } catch (error) {
+      throw new Error("Login failed. Please check your email and password.");
+    }
+  };  
+
+  const logOut = () => {
+    // Xóa token và thông tin người dùng khỏi localStorage
+    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("userEmail");
+
+    setUser(null);
+    navigate("/");
+  };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
-      setUser(currentuser);
-    });
-
-    return () => {
-      unsubscribe();
-    };
+    const storedEmail = localStorage.getItem("userEmail");
+    if (storedEmail) {
+      setUser({ email: storedEmail });
+    }
   }, []);
 
   return (
-    <userAuthContext.Provider
-      value={{ user, logIn,  logOut  }}
-    >
+    <userAuthContext.Provider value={{ user, logIn, logOut }}>
       {children}
     </userAuthContext.Provider>
   );

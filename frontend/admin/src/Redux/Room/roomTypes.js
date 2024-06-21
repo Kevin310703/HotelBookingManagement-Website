@@ -1,0 +1,4 @@
+// roomTypes.js
+export const ROOM_UPDATE_REQUEST = 'ROOM_UPDATE_REQUEST';
+export const ROOM_UPDATE_SUCCESS = 'ROOM_UPDATE_SUCCESS';
+export const ROOM_UPDATE_FAIL = 'ROOM_UPDATE_FAIL';

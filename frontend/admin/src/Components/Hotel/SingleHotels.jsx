@@ -1,10 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Banner from "./Banner";
-import StyledHero from "../Components/StyledHero";
+import Banner from "../Banner";
+import StyledHero from "../StyledHero";
 import { ref, remove } from "firebase/database";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 
 const SingleRooms = () => {
   const { slug } = useParams();

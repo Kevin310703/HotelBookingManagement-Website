@@ -44,45 +44,84 @@ const Navbar = () => {
           </a>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
+              <li className="nav-item dropdown">
                 <NavLink
-                  className="nav-link"
+                  className="nav-link dropdown-toggle"
                   //   activeClassName="active_class"
                   exact="true"
                   to="/rooms"
+                  id="roomsDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
                 >
-                  Rooms
+                  Room
                 </NavLink>
+                <div className="dropdown-menu" aria-labelledby="roomsDropdown">
+                  <NavLink className="dropdown-item" to="/rooms">
+                    Room List
+                  </NavLink>
+                  <NavLink className="dropdown-item" to="/addRoom">
+                    Add Room
+                  </NavLink>
+                  <NavLink className="dropdown-item" to="/updateRoom">
+                    Update Room
+                  </NavLink>
+                </div>
               </li>
-              <li className="nav-item">
+
+              <li className="nav-item dropdown">
                 <NavLink
-                  className="nav-link"
+                  className="nav-link dropdown-toggle"
                   //   activeClassName="active_class"
                   exact="true"
-                  to="/addRoom"
+                  to="/hotels"
+                  id="roomsDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
                 >
-                  Add Room
+                  Hotel
                 </NavLink>
+                <div className="dropdown-menu" aria-labelledby="roomsDropdown">
+                  <NavLink className="dropdown-item" to="/hotels">
+                    Hotel List
+                  </NavLink>
+                  <NavLink className="dropdown-item" to="/addHotel">
+                    Add Hotel
+                  </NavLink>
+                  <NavLink className="dropdown-item" to="/updateHotel">
+                    Update Hotel
+                  </NavLink>
+                </div>
               </li>
-              <li className="nav-item">
+              <li className="nav-item dropdown">
                 <NavLink
-                  className="nav-link"
-                  //   activeClassName="active_class"
-                  exact="true"
-                  to="/update-room"
-                >
-                  Update Room
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink
-                  className="nav-link"
+                  className="nav-link dropdown-toggle"
                   //   activeClassName="active_class"
                   exact="true"
                   to="/users"
+                  id="roomsDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
                 >
-                  Users
+                  User
                 </NavLink>
+                <div className="dropdown-menu" aria-labelledby="roomsDropdown">
+                  <NavLink className="dropdown-item" to="/users">
+                    User List
+                  </NavLink>
+                  <NavLink className="dropdown-item" to="/addUser">
+                    Add User
+                  </NavLink>
+                  <NavLink className="dropdown-item" to="/updateUser">
+                    Update User
+                  </NavLink>
+                </div>
               </li>
               <li>
                 <NavLink
